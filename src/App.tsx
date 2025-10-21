@@ -7,6 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 //  X: Pay Respect  |  O: Contact  |  []: Toggle Projects Grid  |  Δ: Toggle Skills  |  Enter: Start/Pause  |  Esc: Back/Home
 //  Tips buttons are clickable on screen as well.
 
+// Import images for proper asset handling
+const imgX = new URL('./images/x.png', import.meta.url).href;
+const imgO = new URL('./images/o.png', import.meta.url).href;
+const imgSquare = new URL('./images/square.png', import.meta.url).href;
+const imgTriangle = new URL('./images/triangle.png', import.meta.url).href;
+const imgStart = new URL('./images/start.png', import.meta.url).href;
+const imgSelect = new URL('./images/select.png', import.meta.url).href;
+const videoPs2 = new URL('./images/ps2-start.mp4', import.meta.url).href;
+
 const ps2Blue = "from-[#0b254a] via-[#091a33] to-[#030812]";
 const glowBlue = "shadow-[0_0_40px_rgba(0,162,255,0.35)]";
 
@@ -123,12 +132,12 @@ function ControllerHUD({ onCmd }: { onCmd: (cmd: string) => void }) {
   return (
     <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
       <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-white/10 bg-black/40 px-3 py-3 backdrop-blur">
-        <Btn label="Press X to Pay Respect" imgSrc="./images/x.png" cmd="respect" />
-        <Btn label="Press O to Contact" imgSrc="./images/o.png" cmd="contact" />
-        <Btn label="Press [] for Projects" imgSrc="./images/square.png" cmd="projects" />
-        <Btn label="Press Δ for Skills" imgSrc="./images/triangle.png" cmd="skills" />
-        <Btn label="Press START to Pause" imgSrc="./images/start.png" cmd="pause" />
-        <Btn label="Press SELECT to Home" imgSrc="./images/select.png" cmd="home" />
+        <Btn label="Press X to Pay Respect" imgSrc={imgX} cmd="respect" />
+        <Btn label="Press O to Contact" imgSrc={imgO} cmd="contact" />
+        <Btn label="Press [] for Projects" imgSrc={imgSquare} cmd="projects" />
+        <Btn label="Press Δ for Skills" imgSrc={imgTriangle} cmd="skills" />
+        <Btn label="Press START to Pause" imgSrc={imgStart} cmd="pause" />
+        <Btn label="Press SELECT to Home" imgSrc={imgSelect} cmd="home" />
       </div>
     </div>
   );
@@ -242,7 +251,7 @@ function PS2IntroVideo({ onComplete }: { onComplete: () => void }) {
         autoPlay
         muted
       >
-        <source src="./images/ps2-start.mp4" type="video/mp4" />
+        <source src={videoPs2} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -272,27 +281,27 @@ export default function PS2Portfolio() {
     () => (
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-white/50">
         <div className="flex items-center gap-2">
-          <img src="./images/x.png" alt="X" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgX} alt="X" className="h-4 w-4 object-contain opacity-70" />
           <span>Respect</span>
         </div>
         <div className="flex items-center gap-2">
-          <img src="./images/o.png" alt="O" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgO} alt="O" className="h-4 w-4 object-contain opacity-70" />
           <span>Contact</span>
         </div>
         <div className="flex items-center gap-2">
-          <img src="./images/square.png" alt="Square" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgSquare} alt="Square" className="h-4 w-4 object-contain opacity-70" />
           <span>Projects</span>
         </div>
         <div className="flex items-center gap-2">
-          <img src="./images/triangle.png" alt="Triangle" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgTriangle} alt="Triangle" className="h-4 w-4 object-contain opacity-70" />
           <span>Skills</span>
         </div>
         <div className="flex items-center gap-2">
-          <img src="./images/start.png" alt="START" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgStart} alt="START" className="h-4 w-4 object-contain opacity-70" />
           <span>Pause</span>
         </div>
         <div className="flex items-center gap-2">
-          <img src="./images/select.png" alt="SELECT" className="h-4 w-4 object-contain opacity-70" />
+          <img src={imgSelect} alt="SELECT" className="h-4 w-4 object-contain opacity-70" />
           <span>Home</span>
         </div>
       </div>
@@ -384,13 +393,13 @@ export default function PS2Portfolio() {
                 <div className="mx-auto max-w-2xl text-center text-white/80">
                   I'm a junior software engineer who enjoys full-stack development with expertise in both backend and frontend technologies. I build fast, reliable, and scalable applications focused on delivering high-quality software.
                   <span className="ml-1 text-cyan-300 inline-flex items-center gap-1">
-                    Press <img src="./images/square.png" alt="Square" className="h-4 w-4 object-contain" /> to browse projects
+                    Press <img src={imgSquare} alt="Square" className="h-4 w-4 object-contain" /> to browse projects
                   </span>,
                   <span className="ml-1 text-cyan-300 inline-flex items-center gap-1">
-                    <img src="./images/triangle.png" alt="Triangle" className="h-4 w-4 object-contain" /> for skills
+                    <img src={imgTriangle} alt="Triangle" className="h-4 w-4 object-contain" /> for skills
                   </span>, or
                   <span className="ml-1 text-cyan-300 inline-flex items-center gap-1">
-                    <img src="./images/o.png" alt="O" className="h-4 w-4 object-contain" /> to contact
+                    <img src={imgO} alt="O" className="h-4 w-4 object-contain" /> to contact
                   </span>.
                 </div>
 
@@ -398,7 +407,7 @@ export default function PS2Portfolio() {
                   <span>RESPECTS PAID:</span>
                   <span className="rounded-md border border-white/10 bg-black/40 px-2 py-0.5 font-mono">{respects}</span>
                   <span className={`ml-2 inline-flex items-center gap-1 ${blink ? "opacity-80" : "opacity-30"}`}>
-                    Press <img src="./images/x.png" alt="X" className="h-4 w-4 object-contain" /> to pay respect
+                    Press <img src={imgX} alt="X" className="h-4 w-4 object-contain" /> to pay respect
                   </span>
                 </div>
 
