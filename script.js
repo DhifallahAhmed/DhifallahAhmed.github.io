@@ -39,12 +39,47 @@ let blinkInterval;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    initIntro();
+    initCDScreen();
     setupEventListeners();
     createParticles();
     startBlinking();
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });
+
+// CD Insertion Screen
+function initCDScreen() {
+    const cdScreen = document.getElementById('cd-screen');
+    const insertBtn = document.getElementById('insert-cd-btn');
+    const cdDisc = document.getElementById('cd-disc');
+
+    // Add spinning animation to CD
+    cdDisc.style.animation = 'spin 3s linear infinite';
+
+    // Handle CD insertion
+    insertBtn.addEventListener('click', () => {
+        insertCD();
+    });
+
+    // Also allow pressing Enter or Space
+    window.addEventListener('keydown', (e) => {
+        if (cdScreen.style.display !== 'none' && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            insertCD();
+        }
+    });
+
+    function insertCD() {
+        // Add insertion animation
+        cdDisc.style.animation = 'insertCD 0.8s ease-in forwards';
+        insertBtn.disabled = true;
+        insertBtn.style.opacity = '0.5';
+
+        setTimeout(() => {
+            cdScreen.style.display = 'none';
+            initIntro();
+        }, 800);
+    }
+}
 
 // Intro Video
 function initIntro() {
@@ -53,13 +88,16 @@ function initIntro() {
     const skipText = document.getElementById('skip-text');
     let canSkip = false;
 
+    // Show intro screen
+    introScreen.classList.remove('hidden');
+
     // Show skip text after 2 seconds
     setTimeout(() => {
         canSkip = true;
         skipText.classList.remove('hidden');
     }, 2000);
 
-    // Play video
+    // Play video with sound (user has already interacted by clicking CD)
     introVideo.play().catch(console.error);
 
     // Video ended

@@ -34,6 +34,31 @@
     }
 }
 
+/* CD Spin Animation */
+@keyframes spin {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+/* CD Insertion Animation */
+@keyframes insertCD {
+    0% {
+        transform: translateY(0) rotateZ(0deg) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-20px) rotateZ(180deg) scale(1.05);
+    }
+    100% {
+        transform: translateY(-200px) rotateZ(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
 /* HUD Button Styles */
 .hud-btn {
     display: flex;
