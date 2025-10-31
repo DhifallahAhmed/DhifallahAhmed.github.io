@@ -1,6 +1,3 @@
-// PS2 Portfolio JavaScript
-
-// Data
 const projectsData = [
     
     {
@@ -56,12 +53,10 @@ const skillsData = {
     ]
 };
 
-// State
 let currentSection = "home";
 let respects = 0;
 let blinkInterval;
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initCDScreen();
     setupEventListeners();
@@ -70,21 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });
 
-// CD Insertion Screen
 function initCDScreen() {
     const cdScreen = document.getElementById('cd-screen');
     const insertBtn = document.getElementById('insert-cd-btn');
     const cdDisc = document.getElementById('cd-disc');
 
-    // Add spinning animation to CD
     cdDisc.style.animation = 'spin 3s linear infinite';
 
-    // Handle CD insertion
     insertBtn.addEventListener('click', () => {
         insertCD();
     });
 
-    // Also allow pressing Enter or Space
     window.addEventListener('keydown', (e) => {
         if (cdScreen.style.display !== 'none' && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
@@ -93,7 +84,6 @@ function initCDScreen() {
     });
 
     function insertCD() {
-        // Add insertion animation
         cdDisc.style.animation = 'insertCD 0.8s ease-in forwards';
         insertBtn.disabled = true;
         insertBtn.style.opacity = '0.5';
@@ -105,31 +95,25 @@ function initCDScreen() {
     }
 }
 
-// Intro Video
 function initIntro() {
     const introScreen = document.getElementById('intro-screen');
     const introVideo = document.getElementById('intro-video');
     const skipText = document.getElementById('skip-text');
     let canSkip = false;
 
-    // Show intro screen
     introScreen.classList.remove('hidden');
 
-    // Show skip text after 2 seconds
     setTimeout(() => {
         canSkip = true;
         skipText.classList.remove('hidden');
     }, 2000);
 
-    // Play video with sound (user has already interacted by clicking CD)
     introVideo.play().catch(console.error);
 
-    // Video ended
     introVideo.addEventListener('ended', () => {
         completeIntro();
     });
 
-    // Skip functionality
     const skipIntro = (e) => {
         if (canSkip && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) {
             completeIntro();
@@ -149,7 +133,6 @@ function initIntro() {
     }
 }
 
-// Create Floating Particles
 function createParticles() {
     const container = document.getElementById('particles-container');
     const particleCount = 36;
@@ -157,7 +140,7 @@ function createParticles() {
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('span');
         particle.className = 'particle';
-        
+
         const x = Math.random() * 100;
         const y = Math.random() * 100;
         const size = Math.random() * 3 + 1;
@@ -173,7 +156,6 @@ function createParticles() {
         container.appendChild(particle);
     }
 
-    // Add particle animation
     const style = document.createElement('style');
     style.textContent = `
         @keyframes float {
@@ -190,7 +172,6 @@ function createParticles() {
     document.head.appendChild(style);
 }
 
-// Blinking Animation
 function startBlinking() {
     blinkInterval = setInterval(() => {
         const blinkElement = document.querySelector('.blink');
@@ -200,19 +181,16 @@ function startBlinking() {
     }, 900);
 }
 
-// Event Listeners
 function setupEventListeners() {
-    // HUD Buttons
     document.querySelectorAll('.hud-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             executeCommand(btn.dataset.cmd);
         });
     });
 
-    // Keyboard Controls
     window.addEventListener('keydown', (e) => {
         const key = e.key.toLowerCase();
-        
+
         if (key === 'x') executeCommand('respect');
         else if (key === 'o') executeCommand('contact');
         else if (key === '[' || key === ']' || key === 'p') executeCommand('projects');
@@ -222,7 +200,6 @@ function setupEventListeners() {
     });
 }
 
-// Execute Command
 function executeCommand(cmd) {
     if (cmd === 'respect') {
         respects++;
@@ -245,7 +222,6 @@ function executeCommand(cmd) {
     }
 }
 
-// Render Section
 function renderSection(section) {
     const contentArea = document.getElementById('content-area');
 
@@ -260,7 +236,6 @@ function renderSection(section) {
     }
 }
 
-// HTML Templates
 function getHomeHTML() {
     return `
         <div class="grid gap-8">
