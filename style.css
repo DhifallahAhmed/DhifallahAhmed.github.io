@@ -141,6 +141,15 @@
     letter-spacing: 0.05em;
 }
 
+/* Skill Category Styles */
+.skill-category {
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.4), rgba(30, 41, 59, 0.2));
+    backdrop-filter: blur(10px);
+}
+
 /* Skill Item Styles */
 .skill-item {
     padding: 1rem;
@@ -224,10 +233,84 @@ button[type="submit"]:active {
     transform: scale(0.98);
 }
 
+/* Contact Info Card Styles */
+.contact-info-card {
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(30, 41, 59, 0.3));
+    backdrop-filter: blur(10px);
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(6, 182, 212, 0.1);
+    border-left: 3px solid rgba(6, 182, 212, 0.5);
+    padding-left: calc(1rem - 3px);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    min-width: 2rem;
+    text-align: center;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    /* Controller HUD - Mobile Optimizations */
+    #controller-hud {
+        bottom: 0.5rem;
+        left: 0;
+        right: 0;
+        transform: none;
+        padding: 0 0.5rem;
+    }
+
+    #controller-hud > div {
+        gap: 0.25rem;
+        padding: 0.5rem 0.25rem;
+        border-radius: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hud-btn {
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        min-width: 0;
+        flex: 1;
+    }
+
     .hud-btn span {
-        font-size: 0.75rem;
+        font-size: 0.625rem;
+        line-height: 1.1;
+        text-align: center;
+        display: none; /* Hide text on very small screens */
+    }
+
+    .hud-btn .inline-grid {
+        height: 2rem !important;
+        width: 2rem !important;
+    }
+
+    .hud-btn img {
+        height: 1.25rem !important;
+        width: 1.25rem !important;
+    }
+
+    /* Ensure content doesn't get hidden behind HUD */
+    main {
+        padding-bottom: 5rem !important;
     }
 
     .memory-card {
@@ -237,6 +320,54 @@ button[type="submit"]:active {
     .skill-item {
         padding: 0.75rem;
         font-size: 0.75rem;
+    }
+
+    .contact-info-card {
+        padding: 1.5rem;
+    }
+
+    .contact-item {
+        padding: 0.75rem;
+    }
+}
+
+/* Tablet and larger phones */
+@media (min-width: 480px) and (max-width: 768px) {
+    .hud-btn span {
+        display: block !important;
+        font-size: 0.65rem;
+    }
+
+    .hud-btn .inline-grid {
+        height: 2.25rem !important;
+        width: 2.25rem !important;
+    }
+
+    .hud-btn img {
+        height: 1.5rem !important;
+        width: 1.5rem !important;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    #controller-hud > div {
+        gap: 0.125rem;
+        padding: 0.375rem 0.125rem;
+    }
+
+    .hud-btn {
+        padding: 0.125rem;
+    }
+
+    .hud-btn .inline-grid {
+        height: 1.75rem !important;
+        width: 1.75rem !important;
+    }
+
+    .hud-btn img {
+        height: 1rem !important;
+        width: 1rem !important;
     }
 }
 

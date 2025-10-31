@@ -2,6 +2,21 @@
 
 // Data
 const projectsData = [
+    
+    {
+        title: "Secure Todo App",
+        subtitle: "Spring Boot + Svelte + DevSecOps",
+        desc: "Full-stack application demonstrating modern DevSecOps practices with Spring Boot backend, Svelte frontend, MongoDB/H2 database, Docker containerization, GitHub Actions CI/CD, Trivy vulnerability scanning, OWASP security, and ELK stack for logging & monitoring.",
+        tags: ["Spring Boot", "Svelte", "MongoDB", "Docker", "GitHub Actions", "Trivy", "OWASP", "ELK Stack"],
+        link: "#secure-todo"
+    },
+    {
+        title: "Plumber Web Application",
+        subtitle: "Svelte + Supabase + Resend + Paypal",
+        desc: "Web application for a plumber in France. The main features include: showcase, contact and quotation request with email confirmation and payment.",
+        tags: ["Svelte", "Supabase", "Resend", "Paypal"],
+        link: "#plumber"
+    },
     {
         title: "Incident Management Web Application",
         subtitle: "Spring Boot + Angular + SonarQube",
@@ -22,15 +37,24 @@ const projectsData = [
         desc: "Web platform connecting clubs and users with event management, secure payment processing, and real-time chatbot support.",
         tags: ["Node.js", "Express", "React", "MongoDB", "Payment Integration"],
         link: "#fullstack-js"
-    }
+    },
+       
 ];
 
-const skillsData = [
-    "Java", "Angular", "Spring Boot", "React", "Svelte 5", "TypeScript",
-    "Node.js", "Express", "MongoDB", "PostgreSQL", "Redis", "Docker",
-    "Jenkins", "Maven", "SonarQube", "WebSocket", "REST APIs", "JWT",
-    "HTML", "CSS", "SQL", "Git", "Linux", "Kubernetes"
-];
+const skillsData = {
+    "Frontend": [
+        "Angular", "React", "Svelte 5", "HTML", "CSS", "Flutter"
+    ],
+    "Backend": [
+        "Spring Boot", "Express", "REST APIs", "WebSocket", "JWT"
+    ],
+    "Database": [
+        "MongoDB", "PostgreSQL", "Redis", "MySQL"
+    ],
+    "DevOps": [
+        "Docker", "Jenkins", "Maven", "SonarQube", "Kubernetes", "Git", "Linux", "Github Actions"
+    ]
+};
 
 // State
 let currentSection = "home";
@@ -224,7 +248,7 @@ function executeCommand(cmd) {
 // Render Section
 function renderSection(section) {
     const contentArea = document.getElementById('content-area');
-    
+
     if (section === 'home') {
         contentArea.innerHTML = getHomeHTML();
     } else if (section === 'projects') {
@@ -233,7 +257,6 @@ function renderSection(section) {
         contentArea.innerHTML = getSkillsHTML();
     } else if (section === 'contact') {
         contentArea.innerHTML = getContactHTML();
-        setupContactForm();
     }
 }
 
@@ -296,8 +319,15 @@ function getSkillsHTML() {
                 <div class="text-xs text-cyan-300/80">Character</div>
                 <h2 class="text-2xl font-bold tracking-wider">SKILL TREE</h2>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                ${skillsData.map(s => `<div class="skill-item">${s}</div>`).join('')}
+            <div class="grid gap-6">
+                ${Object.entries(skillsData).map(([category, skills]) => `
+                    <div class="skill-category">
+                        <h3 class="text-lg font-semibold text-cyan-300/90 mb-3 tracking-wide">${category}</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            ${skills.map(s => `<div class="skill-item">${s}</div>`).join('')}
+                        </div>
+                    </div>
+                `).join('')}
             </div>
             ${getFooterTipsHTML()}
         </div>
@@ -310,33 +340,47 @@ function getContactHTML() {
             <div class="mb-6">
                 <div class="text-xs text-cyan-300/80">Link Cable</div>
                 <h2 class="text-2xl font-bold tracking-wider">CONTACT AHMED</h2>
-                <div class="mt-4 space-y-2 text-sm text-white/70">
-                    <div>📧 <a href="mailto:Dhifallahahmed92@gmail.com" class="text-cyan-300 hover:text-cyan-200">Dhifallahahmed92@gmail.com</a></div>
-                    <div>📱 <a href="tel:+21627636653" class="text-cyan-300 hover:text-cyan-200">+216 27 636 653</a></div>
-                    <div>📍 Ariana, Tunisia</div>
-                    <div>💼 <a href="https://linkedin.com/in/ahmed-dhifallah-077313180" class="text-cyan-300 hover:text-cyan-200">LinkedIn</a> • <a href="https://github.com/DhifallahAhmed" class="text-cyan-300 hover:text-cyan-200">GitHub</a></div>
+            </div>
+
+            <div class="contact-info-card">
+                <div class="space-y-4">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div class="text-xs text-white/50 uppercase tracking-wide mb-1">Email</div>
+                            <a href="mailto:Dhifallahahmed92@gmail.com" class="text-cyan-300 hover:text-cyan-200 transition-colors">Dhifallahahmed92@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <div class="text-xs text-white/50 uppercase tracking-wide mb-1">Phone</div>
+                            <a href="tel:+21627636631" class="text-cyan-300 hover:text-cyan-200 transition-colors">+216 27 636 631</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="text-xs text-white/50 uppercase tracking-wide mb-1">Location</div>
+                            <div class="text-white/70">Ariana, Tunisia</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <div class="text-xs text-white/50 uppercase tracking-wide mb-1">Social</div>
+                            <div class="flex gap-4">
+                                <a href="https://linkedin.com/in/ahmed-dhifallah-077313180" target="_blank" class="text-cyan-300 hover:text-cyan-200 transition-colors">LinkedIn</a>
+                                <a href="https://github.com/DhifallahAhmed" target="_blank" class="text-cyan-300 hover:text-cyan-200 transition-colors">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <form id="contact-form" class="grid gap-4">
-                <label class="grid gap-1">
-                    <span class="text-sm text-white/70">Name</span>
-                    <input name="name" required class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 outline-none ring-0 focus:border-cyan-400/40">
-                </label>
-                <label class="grid gap-1">
-                    <span class="text-sm text-white/70">Email</span>
-                    <input name="email" type="email" required class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 outline-none ring-0 focus:border-cyan-400/40">
-                </label>
-                <label class="grid gap-1">
-                    <span class="text-sm text-white/70">Message</span>
-                    <textarea name="message" rows="5" required class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 outline-none ring-0 focus:border-cyan-400/40"></textarea>
-                </label>
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="rounded-2xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-semibold tracking-wide text-cyan-100 hover:bg-cyan-400/20">
-                        SEND (O)
-                    </button>
-                    <div class="text-xs text-white/60">SELECT (Esc) to go Home</div>
-                </div>
-            </form>
+
             ${getFooterTipsHTML()}
         </div>
     `;
@@ -389,20 +433,3 @@ function getFooterTipsHTML() {
     `;
 }
 
-// Setup Contact Form
-function setupContactForm() {
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
-            };
-            alert(`Message sent!\nName: ${data.name}\nEmail: ${data.email}`);
-            form.reset();
-        });
-    }
-}
