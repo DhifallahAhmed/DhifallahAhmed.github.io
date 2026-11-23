@@ -4,13 +4,12 @@ A nostalgic PlayStation 2-themed portfolio website featuring an interactive CD i
 
 ## ✨ Features
 
-- **🎬 PS2 Intro Video** - Authentic PlayStation 2 startup sequence with sound
-- **💿 CD Insertion Screen** - Interactive CD insertion animation before the intro video
-- **🎮 Controller Navigation** - Navigate using PS2 controller buttons (X, O, □, △, START, SELECT)
-- **🎨 PS2 Aesthetic** - Authentic blue gradient design with scanlines and particle effects
-- **📱 Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
-- **🔊 Sound Support** - Intro video plays with sound after user interaction (compliant with browser autoplay policies)
-- **⚡ Fast & Lightweight** - Vanilla JavaScript with no heavy frameworks
+- **🎬 Boot sequence** - Disc-insert screen + PS2-style intro video (plays once per session, skippable, bypassed for deep links like `/#projects`)
+- **🧊 PS2 system-menu look** - Boot-screen black/deep blue/white palette, animated glowing cube towers, perspective grid, scanlines, translucent "plastic" cards with neon hover glow
+- **📇 Recruiter-friendly layout** - Single scrolling page: sticky nav, About, Projects (with filters), Skills, Contact
+- **🎮 On-screen gamepad** - Fixed controller silhouette (bottom-right) with clickable X / □ / △ / O, START, SELECT and D-pad (prev/next section); collapsible, lights up when you use the keyboard shortcuts
+- **📱 Responsive & accessible** - Mobile menu, keyboard focus states, `prefers-reduced-motion` support, works without JavaScript
+- **⚡ Lightweight** - Plain HTML/CSS/JS, no framework or build step
 
 ## 🚀 Live Demo
 
@@ -19,64 +18,41 @@ Visit the portfolio: **https://dhifallahahmed.github.io/**
 ## 📁 Project Structure
 
 ```
-ps2-portfolio/
-├── index.html          # Main HTML file with Tailwind CSS
-├── script.js           # All JavaScript logic and functionality
-├── style.css           # Custom CSS with animations and effects
-├── README.md           # This file
-├── images/             # PS2 button icons and assets
-│   ├── x.png          # X button icon
-│   ├── o.png          # O button icon
-│   ├── square.png     # Square button icon
-│   ├── triangle.png   # Triangle button icon
-│   ├── start.png      # START button icon
-│   └── select.png     # SELECT button icon
+├── index.html          # All page content (projects, skills, contact are plain HTML)
+├── style.css           # PS2 theme, layout, animations, responsive rules
+├── script.js           # Boot sequence, shortcuts, tower background, filters
+├── images/             # PS2 button icons (x, o, square, triangle, start, select)
 └── videos/
-    └── ps2-start.mp4  # PS2 intro video
+    └── ps2-start.mp4   # Intro video
 ```
 
-## 🎮 How to Use
+## 🎮 Controls
 
-### Navigation
-- **X Button** - Go to Respect section
-- **O Button** - Go to Contact section
-- **□ Button** - Go to Projects section
-- **△ Button** - Go to Skills section
-- **START Button** - Go to Home section
-- **SELECT Button** - Go to Pause menu
+| Key | Action |
+|---|---|
+| `X` | About |
+| `P` / `[` / `]` (□) | Projects |
+| `T` (△) | Skills |
+| `O` | Contact |
+| `Enter` (START) | Open / close system menu |
+| `Esc` (SELECT) | Close menu / back to top |
+| `F` | Pay respects |
 
-### Intro Video
-1. Website loads → CD Insertion screen appears
-2. Click "INSERT CD" button (or press ENTER/SPACE)
-3. CD animates into the console
-4. PS2 intro video plays with sound
-5. Press ENTER, SPACE, or ESC to skip the intro
+Add `?skip` to the URL to bypass the intro.
 
 ## 🛠️ Technologies Used
 
 - **HTML5** - Semantic markup
 - **CSS3** - Animations, gradients, and effects
 - **JavaScript (Vanilla)** - No frameworks, pure JS
-- **Tailwind CSS** - Utility-first CSS framework (via CDN)
+- **Google Fonts** - Rajdhani, Inter, Share Tech Mono
 - **GitHub Pages** - Static site hosting
 
 ## 📝 Customization
 
-### Change Portfolio Content
-Edit `script.js` to modify:
-- `projectsData` - Add/edit your projects
-- `skillsData` - Update your skills
-- `getFooterTipsHTML()` - Modify footer buttons
-
-### Modify Styling
-Edit `style.css` to customize:
-- Colors and gradients
-- Animations and effects
-- Scanlines intensity
-- Particle effects
-
-### Replace Intro Video
-Replace `videos/ps2-start.mp4` with your own video file
+- **Add a project** - copy an `<article class="card">` block in the Projects section of `index.html`; set `data-cat` (`fullstack`, `devops`, `ml`) for the filters. The project count updates automatically.
+- **Colors** - edit the CSS variables at the top of `style.css`.
+- **Intro video** - replace `videos/ps2-start.mp4`.
 
 ## 🌐 Browser Support
 

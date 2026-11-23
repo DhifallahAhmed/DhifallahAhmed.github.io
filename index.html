@@ -3,138 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Dhifallah - PS2 Portfolio</title>
+    <title>Ahmed Dhifallah — Full-Stack Software Engineer</title>
+    <meta name="description" content="Ahmed Dhifallah — Full-stack software engineer (Spring Boot, Svelte, Angular, DevSecOps). Projects, skills and contact.">
+    <meta name="theme-color" content="#02040a">
+    <meta property="og:title" content="Ahmed Dhifallah — Full-Stack Software Engineer">
+    <meta property="og:description" content="Full-stack engineer building fast, reliable web apps with Spring Boot, Svelte, Angular and CI/CD.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dhifallahahmed.github.io/">
     <link rel="icon" type="image/png" href="images/x.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <noscript><style>.boot-screen, .pad { display: none !important; } body.is-booting { overflow: auto; }</style></noscript>
 </head>
-<body class="bg-gradient-to-b from-[#0b254a] via-[#091a33] to-[#030812] text-white min-h-screen overflow-x-hidden">
+<body class="is-booting">
 
-    <div id="cd-screen" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
-        <div class="text-center">
-            <div class="mb-8 flex justify-center">
-                <div id="cd-disc" class="relative w-48 h-48">
-                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-gray-600 shadow-2xl">
-                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent"></div>
-                        <div class="absolute inset-1/3 rounded-full bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-b from-gray-600 to-gray-800 shadow-inner"></div>
-                        </div>
-                    </div>
-                </div>
+    <!-- ============ BOOT: CD SCREEN ============ -->
+    <div id="cd-screen" class="boot-screen" role="dialog" aria-label="Intro">
+        <div class="cd-wrap">
+            <div id="cd-disc" class="cd-disc" aria-hidden="true">
+                <div class="cd-shine"></div>
+                <div class="cd-hub"><div class="cd-hole"></div></div>
             </div>
-
-            <h2 class="text-2xl md:text-4xl font-bold tracking-widest mb-4 text-cyan-300">INSERT CD</h2>
-            <p class="text-white/70 mb-8 text-sm md:text-base">Click to insert the PS2 Portfolio CD</p>
-
-            <button id="insert-cd-btn" class="px-8 py-3 rounded-lg border-2 border-cyan-400/50 bg-cyan-400/10 text-cyan-300 font-semibold hover:bg-cyan-400/20 hover:border-cyan-400 transition-all duration-300 cursor-pointer">
-                INSERT CD
-            </button>
-
-            <p class="text-white/50 text-xs mt-6">🔊 Sound will be enabled after insertion</p>
+            <p class="mono-label">Disc tray open</p>
+            <h2 class="cd-title">INSERT DISC</h2>
+            <p class="cd-sub">Load the portfolio disc to boot the system.</p>
+            <div class="cd-actions">
+                <button id="insert-cd-btn" class="btn btn-primary" type="button">
+                    <img src="images/x.png" alt="" class="btn-glyph"> Insert disc
+                </button>
+                <button id="skip-boot-btn" class="btn btn-ghost" type="button">Skip intro →</button>
+            </div>
+            <p class="cd-hint">🔊 The boot sequence plays with sound</p>
         </div>
     </div>
 
-    <div id="intro-screen" class="fixed inset-0 z-50 bg-black flex items-center justify-center hidden">
-        <video id="intro-video" class="w-full h-full object-contain" >
+    <!-- ============ BOOT: VIDEO ============ -->
+    <div id="intro-screen" class="boot-screen is-hidden">
+        <video id="intro-video" playsinline preload="none">
             <source src="videos/ps2-start.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
-        <div id="skip-text" class="hidden absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 text-sm text-center">
-            <div class="bg-black/50 backdrop-blur rounded-lg px-4 py-2">
-                Press ENTER, SPACE, or ESC to skip
-            </div>
-        </div>
+        <button id="skip-video-btn" class="btn btn-ghost skip-video" type="button">Skip ▸</button>
     </div>
 
-    <div id="main-portfolio" class="hidden relative min-h-screen w-full">
-        <div id="particles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
-
-        <div class="scanlines pointer-events-none absolute inset-0 opacity-30 mix-blend-overlay"></div>
-
-        <div id="controller-hud" class="fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
-            <div class="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-white/10 bg-black/40 px-3 py-3 backdrop-blur">
-                <button class="hud-btn" data-cmd="respect">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/x.png" alt="X" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press X to Pay Respect</span>
-                </button>
-                <button class="hud-btn" data-cmd="contact">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/o.png" alt="O" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press O to Contact</span>
-                </button>
-                <button class="hud-btn" data-cmd="projects">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/square.png" alt="Square" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press [] for Projects</span>
-                </button>
-                <button class="hud-btn" data-cmd="skills">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/triangle.png" alt="Triangle" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press Δ for Skills</span>
-                </button>
-                <button class="hud-btn" data-cmd="pause">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/start.png" alt="START" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press START to Pause</span>
-                </button>
-                <button class="hud-btn" data-cmd="home">
-                    <div class="inline-grid place-items-center h-8 w-8 rounded-full border border-white/20 bg-black/60 p-1">
-                        <img src="images/select.png" alt="SELECT" class="h-6 w-6 object-contain filter brightness-90">
-                    </div>
-                    <span class="text-sm text-white/80">Press SELECT to Home</span>
-                </button>
-            </div>
+    <!-- ============ MAIN ============ -->
+    <div id="main-portfolio">
+        <div class="bg-layer" aria-hidden="true">
+            <div class="bg-grid"></div>
+            <div class="bg-glow"></div>
         </div>
+        <div class="scanlines" aria-hidden="true"></div>
 
-        <div class="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-6 md:py-10">
-            <div class="flex items-center gap-3">
-                <div class="h-8 w-8 rounded-md border border-cyan-400/20 bg-gradient-to-br from-cyan-500/30 to-blue-700/20 shadow-inner"></div>
-                <div class="font-mono text-xs uppercase tracking-[0.35em] text-white/60">PS2 · PORTFOLIO OS</div>
-            </div>
-            <div class="text-right">
-                <div class="text-xs text-white/60" id="pause-text">START ⏎ to Pause</div>
-                <div class="text-[10px] text-white/40">SELECT Esc to Home</div>
-            </div>
-        </div>
+        <a class="skip-link" href="#projects">Skip to projects</a>
 
-        <main class="relative z-10 px-4 pb-36">
-            <div class="ribbon relative mx-auto w-full max-w-6xl rounded-2xl border border-white/10 bg-gradient-to-b from-[#0b254a] via-[#091a33] to-[#030812] p-6 md:p-10">
-                <div class="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#0ea5e9]/20 via-transparent to-[#22d3ee]/20 blur-xl"></div>
+        <header class="site-header" id="top">
+            <nav class="nav container" aria-label="Main">
+                <a href="#home" class="brand" aria-label="Ahmed Dhifallah — home">
+                    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                    <span class="brand-text">AHMED<span>.DHIFALLAH</span></span>
+                </a>
+                <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about" data-nav="about"><img src="images/x.png" alt="" class="nav-glyph">About</a></li>
+                    <li><a href="#projects" data-nav="projects"><img src="images/square.png" alt="" class="nav-glyph">Projects</a></li>
+                    <li><a href="#skills" data-nav="skills"><img src="images/triangle.png" alt="" class="nav-glyph">Skills</a></li>
+                    <li><a href="#contact" data-nav="contact"><img src="images/o.png" alt="" class="nav-glyph">Contact</a></li>
+                    <li><a href="https://github.com/DhifallahAhmed" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a></li>
+                </ul>
+            </nav>
+        </header>
 
-                <div class="relative">
-                    <div class="text-center">
-                        <div class="font-mono text-xs uppercase tracking-[0.6em] text-white/60">Software Engineer Portfolio</div>
-                        <h1 class="mt-3 text-3xl md:text-6xl font-black tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-400 to-blue-500 drop-shadow-[0_0_10px_rgba(56,189,248,0.45)]">
-                            AHMED DHIFALLAH
+        <main>
+            <!-- ============ HERO ============ -->
+            <section id="home" class="hero">
+                <canvas id="tower-canvas" class="tower-canvas" aria-hidden="true"></canvas>
+                <div class="container hero-inner">
+                    <div class="hero-copy reveal">
+                        <p class="mono-label"><span class="status-dot"></span>System ready · Player 1</p>
+                        <h1 class="hero-title">
+                            <span class="hero-first">Ahmed</span>
+                            <span class="hero-last">Dhifallah</span>
                         </h1>
-                        <p class="mt-3 text-white/60">Full-Stack Engineer • Spring Boot • Svelte • Angular • DevOps</p>
-                    </div>
-
-                    <div id="pause-overlay" class="hidden absolute inset-0 z-20 grid place-items-center rounded-2xl bg-black/70 backdrop-blur-sm">
-                        <div class="text-center">
-                            <div class="text-sm text-white/60">Game Paused</div>
-                            <div class="mt-2 text-3xl font-bold tracking-widest">PAUSE MENU</div>
-                            <div class="mt-4 text-white/70">Press START to resume • SELECT to Home</div>
+                        <p class="hero-role">Full-Stack Software Engineer</p>
+                        <p class="hero-summary">
+                            I build fast, reliable and secure web applications end to end —
+                            from Spring Boot APIs and Svelte/Angular front-ends to Dockerized
+                            CI/CD pipelines with built-in security scanning.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#projects" class="btn btn-primary">
+                                <img src="images/square.png" alt="" class="btn-glyph"> View projects
+                            </a>
+                            <a href="#contact" class="btn btn-ghost">
+                                <img src="images/o.png" alt="" class="btn-glyph"> Contact me
+                            </a>
                         </div>
                     </div>
 
-                    <div class="mt-8" id="content-area"></div>
+                    <aside class="sys-panel reveal" aria-label="Quick facts">
+                        <div class="sys-panel-head">
+                            <span>System information</span>
+                            <span class="mono-label">v2.0</span>
+                        </div>
+                        <dl class="sys-list">
+                            <div><dt>Role</dt><dd>Full-Stack Engineer</dd></div>
+                            <div><dt>Core stack</dt><dd>Spring Boot · Svelte · Angular</dd></div>
+                            <div><dt>Focus</dt><dd>DevSecOps · CI/CD · Docker</dd></div>
+                            <div><dt>Location</dt><dd>Ariana, Tunisia</dd></div>
+                            <div><dt>Memory cards</dt><dd><span id="project-count">6</span> projects</dd></div>
+                        </dl>
+                        <a href="mailto:Dhifallahahmed92@gmail.com" class="sys-panel-foot">
+                            <span>Dhifallahahmed92@gmail.com</span><span aria-hidden="true">→</span>
+                        </a>
+                    </aside>
                 </div>
-            </div>
+                <a href="#about" class="scroll-cue" aria-label="Scroll to About"><span></span></a>
+            </section>
+
+            <!-- ============ ABOUT ============ -->
+            <section id="about" class="section">
+                <div class="container">
+                    <header class="section-head reveal">
+                        <p class="mono-label"><img src="images/x.png" alt="" class="head-glyph">01 · Profile</p>
+                        <h2 class="section-title">About</h2>
+                    </header>
+                    <div class="about-grid">
+                        <div class="about-text reveal">
+                            <p>
+                                I'm a junior software engineer who enjoys working across the whole stack.
+                                I design REST APIs in <strong>Spring Boot</strong> and <strong>Express</strong>,
+                                build responsive interfaces in <strong>Svelte</strong>, <strong>Angular</strong> and
+                                <strong>React</strong>, and ship them through automated pipelines with
+                                <strong>Docker</strong>, <strong>Jenkins</strong> and <strong>GitHub Actions</strong>.
+                            </p>
+                            <p>
+                                I care about code quality and security as much as features: unit tests,
+                                SonarQube quality gates, Trivy image scanning and OWASP practices are part of
+                                how I deliver software. Recently I've also been shipping machine-learning
+                                features that run entirely in the browser.
+                            </p>
+                        </div>
+                        <ul class="about-tiles">
+                            <li class="tile reveal">
+                                <span class="tile-icon" aria-hidden="true">▣</span>
+                                <h3>Full-Stack Delivery</h3>
+                                <p>APIs, databases and UIs built and deployed as one product.</p>
+                            </li>
+                            <li class="tile reveal">
+                                <span class="tile-icon" aria-hidden="true">◈</span>
+                                <h3>DevSecOps</h3>
+                                <p>CI/CD, containers, quality gates and vulnerability scanning.</p>
+                            </li>
+                            <li class="tile reveal">
+                                <span class="tile-icon" aria-hidden="true">◆</span>
+                                <h3>Applied ML</h3>
+                                <p>Trained models exported to ONNX and served client-side.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ PROJECTS ============ -->
+            <section id="projects" class="section">
+                <div class="container">
+                    <header class="section-head section-head-row reveal">
+                        <div>
+                            <p class="mono-label"><img src="images/square.png" alt="" class="head-glyph">02 · Memory card (8MB) · Slot 1</p>
+                            <h2 class="section-title">Projects</h2>
+                        </div>
+                        <div class="filter-bar" role="toolbar" aria-label="Filter projects">
+                            <button class="chip is-active" data-filter="all" type="button">All</button>
+                            <button class="chip" data-filter="fullstack" type="button">Full-Stack</button>
+                            <button class="chip" data-filter="devops" type="button">DevOps</button>
+                            <button class="chip" data-filter="ml" type="button">ML</button>
+                        </div>
+                    </header>
+
+                    <div class="project-grid" id="project-grid">
+
+                        <!-- NEW: Scentmate -->
+                        <article class="card card-featured reveal" data-cat="ml fullstack">
+                            <div class="card-top">
+                                <span class="card-slot">Save 01</span>
+                                <span class="badge-new">New</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-sub">Python · ONNX · Netlify</p>
+                                <h3 class="card-title">Scentmate Fragrances</h3>
+                                <p class="card-desc">
+                                    A personality-based fragrance recommender. A short chat asks six questions,
+                                    maps the answers into a learned 64-dimension "scent space" and ranks
+                                    <strong>41,704 fragrances</strong> — popular picks first, hidden gems on request.
+                                    The trained model runs <strong>entirely in the browser</strong> with ONNX Runtime Web
+                                    (WebAssembly): no model server, no cold starts, and answers never leave the device.
+                                    A serverless function stores "I'd wear this" feedback for retraining.
+                                </p>
+                                <ul class="card-points">
+                                    <li>Training pipeline: TF-IDF + SVD scent embeddings and an MLP trait encoder (scikit-learn)</li>
+                                    <li>Model, catalogue and ranking rules fused into a single 8&nbsp;MB ONNX graph</li>
+                                    <li>Static Netlify site + Netlify Functions / Blobs feedback loop</li>
+                                </ul>
+                                <dl class="card-stats">
+                                    <div><dt>Fragrances ranked</dt><dd>41,704</dd></div>
+                                    <div><dt>Quiz questions</dt><dd>6</dd></div>
+                                    <div><dt>Model size</dt><dd>8 MB</dd></div>
+                                    <div><dt>Model servers</dt><dd>0</dd></div>
+                                </dl>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Python</li><li>scikit-learn</li><li>NumPy / SciPy</li><li>ONNX</li>
+                                <li>ONNX Runtime Web</li><li>JavaScript</li><li>Netlify Functions</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed/Scentmate-Fragrances" target="_blank" rel="noopener" class="card-link">
+                                    <img src="images/x.png" alt="" class="btn-glyph"> View on GitHub ↗
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="card reveal" data-cat="fullstack devops">
+                            <div class="card-top"><span class="card-slot">Save 02</span></div>
+                            <div class="card-body">
+                                <p class="card-sub">Spring Boot · Svelte · DevSecOps</p>
+                                <h3 class="card-title">Secure Todo App</h3>
+                                <p class="card-desc">
+                                    Full-stack app showcasing DevSecOps practices: Spring Boot API, Svelte front-end,
+                                    MongoDB/H2, Docker, GitHub Actions CI/CD, Trivy vulnerability scanning, OWASP
+                                    hardening and ELK-based logging &amp; monitoring.
+                                </p>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Spring Boot</li><li>Svelte</li><li>MongoDB</li><li>Docker</li>
+                                <li>GitHub Actions</li><li>Trivy</li><li>ELK</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed/DevSecOps-Personal-Project" target="_blank" rel="noopener" class="card-link">View on GitHub ↗</a>
+                            </div>
+                        </article>
+
+                        <article class="card reveal" data-cat="fullstack">
+                            <div class="card-top"><span class="card-slot">Save 03</span></div>
+                            <div class="card-body">
+                                <p class="card-sub">Svelte · Supabase · Resend · PayPal</p>
+                                <h3 class="card-title">Plumber Web Application</h3>
+                                <p class="card-desc">
+                                    Production website for a plumbing business in France: service showcase,
+                                    contact and quote requests with email confirmation, and online payment.
+                                </p>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Svelte</li><li>Supabase</li><li>Resend</li><li>PayPal</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed/Plumber" target="_blank" rel="noopener" class="card-link">View on GitHub ↗</a>
+                            </div>
+                        </article>
+
+                        <article class="card reveal" data-cat="fullstack">
+                            <div class="card-top"><span class="card-slot">Save 04</span></div>
+                            <div class="card-body">
+                                <p class="card-sub">Spring Boot · Angular · SonarQube</p>
+                                <h3 class="card-title">Incident Management (E-Constat)</h3>
+                                <p class="card-desc">
+                                    Incident reporting and management system with a responsive UI, comprehensive
+                                    unit tests, Docker containerization and SonarQube code-quality checks.
+                                </p>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Spring Boot</li><li>Angular</li><li>Docker</li><li>SonarQube</li><li>JUnit</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed/EConstat-springboot" target="_blank" rel="noopener" class="card-link">View on GitHub ↗</a>
+                            </div>
+                        </article>
+
+                        <article class="card reveal" data-cat="devops">
+                            <div class="card-top"><span class="card-slot">Save 05</span></div>
+                            <div class="card-body">
+                                <p class="card-sub">Spring Boot · Svelte · Jenkins</p>
+                                <h3 class="card-title">DevOps CI/CD Pipeline</h3>
+                                <p class="card-desc">
+                                    Automated build-test-deploy pipeline with Maven, SonarQube and Jenkins;
+                                    containerized deployment with Docker Compose and monitoring.
+                                </p>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Jenkins</li><li>Maven</li><li>SonarQube</li><li>Docker Compose</li><li>Monitoring</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed?tab=repositories" target="_blank" rel="noopener" class="card-link">Browse repositories ↗</a>
+                            </div>
+                        </article>
+
+                        <article class="card reveal" data-cat="fullstack">
+                            <div class="card-top"><span class="card-slot">Save 06</span></div>
+                            <div class="card-body">
+                                <p class="card-sub">Node.js · Express · React · MongoDB</p>
+                                <h3 class="card-title">Clubs &amp; Events Platform</h3>
+                                <p class="card-desc">
+                                    MERN platform connecting clubs and members: event management, secure
+                                    payment processing and a real-time support chatbot.
+                                </p>
+                            </div>
+                            <ul class="tags" aria-label="Tech stack">
+                                <li>Node.js</li><li>Express</li><li>React</li><li>MongoDB</li><li>Payments</li>
+                            </ul>
+                            <div class="card-links">
+                                <a href="https://github.com/DhifallahAhmed?tab=repositories" target="_blank" rel="noopener" class="card-link">Browse repositories ↗</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ SKILLS ============ -->
+            <section id="skills" class="section">
+                <div class="container">
+                    <header class="section-head reveal">
+                        <p class="mono-label"><img src="images/triangle.png" alt="" class="head-glyph">03 · Configuration</p>
+                        <h2 class="section-title">Skills</h2>
+                    </header>
+                    <div class="skills-grid">
+                        <div class="skill-group reveal">
+                            <h3><span class="skill-key">01</span>Frontend</h3>
+                            <ul><li>Svelte 5</li><li>Angular</li><li>React</li><li>HTML / CSS</li><li>Flutter</li></ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3><span class="skill-key">02</span>Backend</h3>
+                            <ul><li>Spring Boot</li><li>Node.js / Express</li><li>REST APIs</li><li>WebSocket</li><li>JWT</li></ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3><span class="skill-key">03</span>Data</h3>
+                            <ul><li>PostgreSQL</li><li>MongoDB</li><li>MySQL</li><li>Redis</li><li>Supabase</li></ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3><span class="skill-key">04</span>DevOps &amp; Security</h3>
+                            <ul><li>Docker</li><li>Kubernetes</li><li>Jenkins</li><li>GitHub Actions</li><li>SonarQube</li><li>Trivy</li><li>Maven</li><li>Git</li><li>Linux</li></ul>
+                        </div>
+                        <div class="skill-group reveal">
+                            <h3><span class="skill-key">05</span>ML &amp; Python</h3>
+                            <ul><li>Python</li><li>scikit-learn</li><li>NumPy</li><li>ONNX</li></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ CONTACT ============ -->
+            <section id="contact" class="section">
+                <div class="container">
+                    <header class="section-head reveal">
+                        <p class="mono-label"><img src="images/o.png" alt="" class="head-glyph">04 · Link cable</p>
+                        <h2 class="section-title">Contact</h2>
+                    </header>
+                    <div class="contact-wrap reveal">
+                        <p class="contact-lead">
+                            Interested in working together or have a role in mind? The fastest way to reach me is by email.
+                        </p>
+                        <div class="contact-grid">
+                            <a class="contact-card" href="mailto:Dhifallahahmed92@gmail.com">
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value">Dhifallahahmed92@gmail.com</span>
+                            </a>
+                            <a class="contact-card" href="tel:+21627636631">
+                                <span class="contact-label">Phone</span>
+                                <span class="contact-value">+216 27 636 631</span>
+                            </a>
+                            <a class="contact-card" href="https://linkedin.com/in/ahmed-dhifallah-077313180" target="_blank" rel="noopener">
+                                <span class="contact-label">LinkedIn</span>
+                                <span class="contact-value">ahmed-dhifallah ↗</span>
+                            </a>
+                            <a class="contact-card" href="https://github.com/DhifallahAhmed" target="_blank" rel="noopener">
+                                <span class="contact-label">GitHub</span>
+                                <span class="contact-value">DhifallahAhmed ↗</span>
+                            </a>
+                            <div class="contact-card is-static">
+                                <span class="contact-label">Location</span>
+                                <span class="contact-value">Ariana, Tunisia</span>
+                            </div>
+                            <button class="contact-card copy-card" id="copy-email" type="button" data-email="Dhifallahahmed92@gmail.com">
+                                <span class="contact-label">Quick action</span>
+                                <span class="contact-value" id="copy-email-text">Copy email address</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <footer class="relative z-10 mx-auto my-8 max-w-6xl px-4 text-center text-xs text-white/50">
-            © <span id="current-year"></span> Player 1 — Software Engineer. Not affiliated with Sony. PS2 vibes only.
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p>© <span id="current-year"></span> Ahmed Dhifallah · Fan-made PS2-inspired design, not affiliated with Sony.</p>
+                <p class="respects">
+                    <button id="respect-btn" type="button" class="respect-btn">Press <kbd>F</kbd> to pay respects</button>
+                    <span class="respect-count" id="respects-count" aria-live="polite">0</span>
+                </p>
+            </div>
         </footer>
 
-        <div class="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-white/10"></div>
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_400px_at_50%_-20%,rgba(56,189,248,0.15),transparent_60%)]"></div>
+        <!-- Fixed gamepad navigator -->
+        <nav class="pad" id="pad" aria-label="Controller navigation">
+            <button class="pad-toggle" id="pad-toggle" type="button" aria-expanded="true" aria-controls="pad-body" title="Hide controller">
+                <span class="pad-toggle-icon" aria-hidden="true">▾</span><span class="pad-toggle-text">Controller</span>
+            </button>
+            <div class="pad-body" id="pad-body">
+                <svg class="pad-shell" viewBox="0 0 320 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="padFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#14306a" stop-opacity=".92"/>
+                            <stop offset="1" stop-color="#040c22" stop-opacity=".95"/>
+                        </linearGradient>
+                        <linearGradient id="padShine" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#ffffff" stop-opacity=".16"/>
+                            <stop offset=".5" stop-color="#ffffff" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- shoulder buttons -->
+                    <rect class="pad-shoulder" x="48" y="14" width="62" height="16" rx="7"/>
+                    <rect class="pad-shoulder" x="210" y="14" width="62" height="16" rx="7"/>
+                    <!-- body -->
+                    <path class="pad-body-shape" d="M70 28 C100 21 130 25 160 25 C190 25 220 21 250 28 C286 37 306 70 312 110 C320 150 312 186 285 191 C262 195 245 176 232 156 C222 141 210 135 195 135 L125 135 C110 135 98 141 88 156 C75 176 58 195 35 191 C8 186 0 150 8 110 C14 70 34 37 70 28 Z"/>
+                    <path class="pad-shine" d="M70 28 C100 21 130 25 160 25 C190 25 220 21 250 28 C286 37 306 70 312 110 L8 110 C14 70 34 37 70 28 Z"/>
+                    <!-- d-pad -->
+                    <path class="pad-dpad" d="M72 62 h16 v15 h15 v16 h-15 v15 h-16 v-15 h-15 v-16 h15 Z"/>
+                    <!-- analog sticks -->
+                    <circle class="pad-stick-well" cx="120" cy="110" r="16"/>
+                    <circle class="pad-stick" cx="120" cy="110" r="10"/>
+                    <circle class="pad-stick-well" cx="200" cy="110" r="16"/>
+                    <circle class="pad-stick" cx="200" cy="110" r="10"/>
+                    <!-- center label + LED -->
+                    <text class="pad-label" x="160" y="52" text-anchor="middle">PORTFOLIO</text>
+                    <circle class="pad-led" cx="160" cy="112" r="3"/>
+                </svg>
+
+                <button class="pad-btn pad-dir pad-up" data-cmd="prev" type="button" aria-label="Previous section" data-tip="Prev section">▲</button>
+                <button class="pad-btn pad-dir pad-down" data-cmd="next" type="button" aria-label="Next section" data-tip="Next section">▼</button>
+
+                <button class="pad-btn pad-mid pad-select" data-cmd="home" type="button" aria-label="SELECT: back to top" data-tip="Top"><img src="images/select.png" alt=""></button>
+                <button class="pad-btn pad-mid pad-start" data-cmd="menu" type="button" aria-label="START: open menu" data-tip="Menu"><img src="images/start.png" alt=""></button>
+
+                <button class="pad-btn pad-face pad-triangle" data-cmd="skills" type="button" aria-label="Triangle: Skills" data-tip="Skills"><img src="images/triangle.png" alt=""></button>
+                <button class="pad-btn pad-face pad-circle" data-cmd="contact" type="button" aria-label="Circle: Contact" data-tip="Contact"><img src="images/o.png" alt=""></button>
+                <button class="pad-btn pad-face pad-cross" data-cmd="about" type="button" aria-label="Cross: About" data-tip="About"><img src="images/x.png" alt=""></button>
+                <button class="pad-btn pad-face pad-square" data-cmd="projects" type="button" aria-label="Square: Projects" data-tip="Projects"><img src="images/square.png" alt=""></button>
+            </div>
+        </nav>
+
+        <!-- START / pause menu -->
+        <div id="pause-overlay" class="pause-overlay" hidden>
+            <div class="pause-menu" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+                <p class="mono-label">Paused</p>
+                <h2 id="pause-title">System Menu</h2>
+                <ul>
+                    <li><a href="#about" data-close><img src="images/x.png" alt="">About</a></li>
+                    <li><a href="#projects" data-close><img src="images/square.png" alt="">Projects</a></li>
+                    <li><a href="#skills" data-close><img src="images/triangle.png" alt="">Skills</a></li>
+                    <li><a href="#contact" data-close><img src="images/o.png" alt="">Contact</a></li>
+                    <li><button type="button" id="replay-intro"><img src="images/start.png" alt="">Replay boot intro</button></li>
+                </ul>
+                <p class="pause-hint">Keys: X □(P) △(T) O · Enter = menu · Esc = close / top</p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
