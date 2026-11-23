@@ -192,31 +192,35 @@
                                 <span class="badge-new">New</span>
                             </div>
                             <div class="card-body">
-                                <p class="card-sub">Python · ONNX · Netlify</p>
+                                <p class="card-sub">Python · ONNX · Web Workers · Netlify</p>
                                 <h3 class="card-title">Scentmate Fragrances</h3>
                                 <p class="card-desc">
-                                    A personality-based fragrance recommender. A short chat asks six questions,
-                                    maps the answers into a learned 64-dimension "scent space" and ranks
-                                    <strong>41,704 fragrances</strong> — popular picks first, hidden gems on request.
-                                    The trained model runs <strong>entirely in the browser</strong> with ONNX Runtime Web
-                                    (WebAssembly): no model server, no cold starts, and answers never leave the device.
-                                    A serverless function stores "I'd wear this" feedback for retraining.
+                                    A personality-based fragrance recommender. A short chat asks six questions about you,
+                                    maps your answers onto 10 personality traits and a learned 64-dimension "scent space",
+                                    and suggests fragrances whose notes fit you from a catalogue of
+                                    <strong>40,319 perfumes</strong>: much-loved picks first, hidden gems on request.
+                                    It can also find fragrances similar to one you already love
+                                    (<em>"I love Dior Sauvage"</em>). The trained model runs <strong>entirely in the browser</strong>
+                                    with ONNX Runtime Web in a background thread: no model server, and answers never leave the device.
                                 </p>
                                 <ul class="card-points">
-                                    <li>Training pipeline: TF-IDF + SVD scent embeddings and an MLP trait encoder (scikit-learn)</li>
-                                    <li>Model, catalogue and ranking rules fused into a single 8&nbsp;MB ONNX graph</li>
-                                    <li>Static Netlify site + Netlify Functions / Blobs feedback loop</li>
+                                    <li>Python data pipeline: cleans the raw Parfumo dataset, imputes accords, classifies gender and scores popularity</li>
+                                    <li>Personality encoder, catalogue and ranking rules fused into one compact 3.9&nbsp;MB ONNX model, run in a Web Worker</li>
+                                    <li>Offline support and instant repeat visits through a service worker and content-hashed, cached-forever assets</li>
+                                    <li>Quality gate on persona-based evaluations, a 12&nbsp;MB first-visit size budget, and real-browser smoke tests</li>
+                                    <li>Netlify Functions + Blobs collect "I'd wear this" feedback for retraining and anonymous health logs</li>
                                 </ul>
                                 <dl class="card-stats">
-                                    <div><dt>Fragrances ranked</dt><dd>41,704</dd></div>
-                                    <div><dt>Quiz questions</dt><dd>6</dd></div>
-                                    <div><dt>Model size</dt><dd>8 MB</dd></div>
+                                    <div><dt>Fragrances</dt><dd>40,319</dd></div>
+                                    <div><dt>Personality traits</dt><dd>10</dd></div>
+                                    <div><dt>Model size</dt><dd>3.9 MB</dd></div>
                                     <div><dt>Model servers</dt><dd>0</dd></div>
                                 </dl>
                             </div>
                             <ul class="tags" aria-label="Tech stack">
                                 <li>Python</li><li>scikit-learn</li><li>NumPy / SciPy</li><li>ONNX</li>
-                                <li>ONNX Runtime Web</li><li>JavaScript</li><li>Netlify Functions</li>
+                                <li>ONNX Runtime Web</li><li>Web Workers</li><li>Service Worker</li>
+                                <li>JavaScript</li><li>Netlify Functions</li><li>Playwright</li>
                             </ul>
                             <div class="card-links">
                                 <a href="https://github.com/DhifallahAhmed/Scentmate-Fragrances" target="_blank" rel="noopener" class="card-link">
